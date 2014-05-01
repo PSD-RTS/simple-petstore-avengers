@@ -1,0 +1,33 @@
+<div class="content">
+  <div id="logo">
+    <a href="/">
+      <img alt="JPetStore" src="/images/logo.png"/>
+    </a>
+  </div>
+  <div id="search-box">
+    <form action="/products" method="get">
+      <input id="keyword" name="keyword" type="text" size="20"/>
+      <button id="search">
+        <img src="/images/magnifier.png"/>
+      </button>
+    </form>
+  </div>
+  <div id="menu">
+    <ul>
+      <li id="home" class="overline {{section}}">
+        <a href="/">Home</a>
+      </li>
+      <li id="shopping-cart" class="overline {{section}}">
+{{#cart}}
+      <a href="/cart">Cart ({{cartQuantity}})</a>
+{{/cart}}
+{{^cart}}
+          Cart (0)
+{{/cart}}
+      </li>
+    </ul>
+    <div id="tab" class="{{section}}">
+      <img src="/images/tab.png"/>
+    </div>
+  </div>
+</div>

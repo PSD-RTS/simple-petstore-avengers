@@ -1,0 +1,41 @@
+<html>
+<head>
+  <title>Items</title>
+</head>
+<body>
+<div id="items">
+{{#none}}
+  <span id="out-of-stock">No item left in inventory</span>
+{{/none}}
+{{^none}}
+  <div id="in-stock"><span id="item-count">{{count}}</span> item(s) available for purchase</div>
+
+  <table id="inventory">
+    <tr>
+      <th>Reference number</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+{{#each}}
+    <tr id="item-{{number}}">
+      <td class="number">{{number}}</td>
+      <td class="description">{{description}}</td>
+      <td class="price">{{price}}</td>
+      <td>
+        <form action="/cart" method="post">
+          <input type="hidden" name="item-number" value="{{number}}"/>
+          <button class="add-to-cart" id="add-to-cart-{{number}}">Add to cart</button>
+        </form>
+      </td>
+    </tr>
+{{/each}}
+  </table>
+
+  <div class="actions">
+    <a class="cancel" href="/">&laquo; continue shopping</a>
+  </div>
+{{/none}}
+</div>
+</body>
+</html>

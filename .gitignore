@@ -1,0 +1,13 @@
+target
+.idea
+*.iml
+*.log
+*.ipr
+*.iws
+*.ids
+.DS_Store
+dependency.cache
+reports
+Gemfile.lock
+build
+.gradle

@@ -1,0 +1,9 @@
+dependencies {
+
+  compile project(':domain')
+
+  testCompile project(':domain').sourceSets.test.output
+  testCompile libs.flyway
+
+  testRuntime libs.mysql
+}

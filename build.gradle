@@ -1,0 +1,145 @@
+allprojects {
+  apply plugin: 'java'
+  apply plugin: 'application'
+
+  group = 'org.testinfected.petstore'
+  version = '0.2-SNAPSHOT'
+
+  repositories {
+    mavenCentral()
+    maven {
+      url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+  }
+}
+
+ext {
+  libs = [
+          mysql             : 'mysql:mysql-connector-java:5.1.21',
+          flyway            : 'com.googlecode.flyway:flyway-core:2.0',
+          cli               : 'com.vtence.cli:cli:1.1-SNAPSHOT',
+          simple            : 'org.simpleframework:simple:5.1.6',
+          jmustache         : 'com.samskivert:jmustache:1.9',
+
+          hamcrest          : ['org.hamcrest:hamcrest-core:1.3@jar',
+                               'org.hamcrest:hamcrest-library:1.3@jar'],
+          hamcrest_extra    : 'org.testinfected.hamcrest-matchers:core-matchers:1.5@jar',
+          hamcrest_dom      : ['com.google.guava:guava:15.0',
+                               'org.antlr:antlr-runtime:3.0.1',
+                               'com.3levers.cssselectors:cssselectors:1.0@jar',
+                               'org.testinfected.hamcrest-matchers:dom-matchers:1.5@jar'],
+          junit             : 'junit:junit:4.11@jar',
+          jmock             : ['org.jmock:jmock:2.6.0@jar',
+                               'org.jmock:jmock-junit4:2.6.0@jar',
+                               'org.jmock:jmock-legacy:2.6.0@jar',
+                               'cglib:cglib-nodep:2.1_3',
+                               'org.objenesis:objenesis:1.0'],
+          juniversal_chardet: 'com.googlecode.juniversalchardet:juniversalchardet:1.0.3',
+          htmlunit          : 'net.sourceforge.htmlunit:htmlunit:2.14',
+          nekohtml          : 'net.sourceforge.nekohtml:nekohtml:1.9.20',
+          selenium_api      : 'org.seleniumhq.selenium:selenium-api:2.37.0',
+          selenium_remote   : 'org.seleniumhq.selenium:selenium-remote-driver:2.37.0',
+          selenium_firefox  : 'org.seleniumhq.selenium:selenium-firefox-driver:2.37.0',
+          selenium_phantom  : 'com.github.detro.ghostdriver:phantomjsdriver:1.0.4',
+          windowlicker      : 'com.googlecode.windowlicker:windowlicker-web:r268',
+          nolog             : ['org.slf4j:slf4j-api:1.5.6',
+                               'org.slf4j:jcl-over-slf4j:1.5.6',
+                               'org.slf4j:slf4j-nop:1.5.6']
+  ]
+}
+
+subprojects {
+  apply plugin: 'jacoco'
+
+  dependencies {
+    testCompile libs.junit
+    testCompile libs.hamcrest
+    testCompile libs.hamcrest_extra
+    testCompile libs.jmock
+    testCompile libs.nolog
+  }
+}
+
+configurations {
+    jacoco
+}
+
+dependencies {
+    jacoco 'org.jacoco:org.jacoco.ant:0.7.0.201403182114'
+}
+
+task coverage(type: JacocoReport) {
+    jacocoClasspath = configurations.jacoco
+    // Add execution data from all subprojects
+    executionData fileTree(project.rootDir.absolutePath).include("*/build/jacoco/*.exec")
+    // Add source classes from all subprojects
+    subprojects.each {
+        sourceSets it.sourceSets.main
+    }
+    // Make the aggregate report go in a top-level directory somewhere
+    reports {
+        xml {
+            enabled true
+            destination "build/reports/jacoco/test/jacocoTestReport.xml"
+        }
+
+        html {
+            enabled true
+            destination "build/reports/jacoco/test/html"
+        }
+    }
+}
+
+mainClassName = 'org.testinfected.petstore.Launcher'
+
+if (!project.hasProperty('env')) {
+  ext.env = 'development'
+}
+
+run {
+  classpath = project(':server').sourceSets.main.runtimeClasspath
+  args '-e', env
+  if (project.hasProperty('host')) {
+    args '-h', host
+  }
+  if (project.hasProperty('port')) {
+    args '-p', port
+  }
+    if (project.hasProperty('timeout')) {
+        args '--timeout', timeout
+    }
+  if (project.hasProperty('quiet')) {
+      args '-q'
+  }
+  args project(':webapp').file('src/main/content')
+}
+
+task 'db-init'(type: JavaExec) {
+  main = 'org.testinfected.petstore.Migrations'
+  classpath = project(':server').sourceSets.main.runtimeClasspath
+  args = ['-e', env, 'init']
+}
+
+task 'db-clean'(type: JavaExec) {
+  main = 'org.testinfected.petstore.Migrations'
+  classpath = project(':server').sourceSets.main.runtimeClasspath
+  args = ['-e', env, 'clean']
+}
+
+task 'db-migrate'(type: JavaExec) {
+  main = 'org.testinfected.petstore.Migrations'
+  classpath = project(':server').sourceSets.main.runtimeClasspath
+  args = ['-e', env, 'migrate']
+}
+
+task 'db-drop'(type: JavaExec) {
+  main = 'org.testinfected.petstore.Migrations'
+  classpath = project(':server').sourceSets.main.runtimeClasspath
+  args = ['-e', env, 'drop']
+}
+
+task 'db-reset'(type: JavaExec) {
+  main = 'org.testinfected.petstore.Migrations'
+  classpath = project(':server').sourceSets.main.runtimeClasspath
+  args = ['-e', env, 'reset']
+}

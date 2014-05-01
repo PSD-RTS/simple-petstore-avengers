@@ -1,0 +1,40 @@
+<html>
+<head>
+  <title>Shopping Cart</title>
+  <meta name="section" content="cart"/>
+</head>
+<body>
+<div id="cart">
+  Your cart contains the following items:
+  <table id="cart-content">
+    <tr>
+      <th>Quantity</th>
+      <th>Item</th>
+      <th>Price</th>
+      <th>Total</th>
+    </tr>
+{{#items}}
+    <tr id="cart-item-{{itemNumber}}">
+      <td class="count">{{quantity}}</td>
+      <td class="text">{{itemDescription}}</td>
+      <td class="price">{{unitPrice}}</td>
+      <td class="total">{{totalPrice}}</td>
+      <td></td>
+    </tr>
+{{/items}}
+    <tr id="cart-summary">
+      <td></td>
+      <td></td>
+      <td class="price">Grand total:</td>
+      <td class="total" id="cart-grand-total">{{grandTotal}}</td>
+      <td></td>
+    </tr>
+  </table>
+
+  <div class="actions">
+    <a class="cancel" href="/">&laquo; continue shopping</a>
+    <div class="confirm"><a href="/orders/new">Checkout</a></div>
+  </div>
+</div>
+</body>
+</html>

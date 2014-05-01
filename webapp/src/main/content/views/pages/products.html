@@ -1,0 +1,32 @@
+<html>
+<head>
+  <title>Products</title>
+</head>
+<body>
+<div id="products">
+{{#none}}
+  <div id="no-match">Your search for "<em>{{keyword}}</em>" did not match any product.</div>
+{{/none}}
+
+{{^none}}
+  <div id="match-found"><span id="match-count">{{count}}</span> result(s)</div>
+
+  <ul id="catalog">
+{{#each}}
+    <li id="product-{{number}}">
+      <a class="product-image" href="/products/{{number}}/items">
+        <img src="{{#photoUrl}}{{photoFileName}}{{/photoUrl}}" alt="{{name}}"/>
+      </a>
+
+      <div class="product-details">
+        <a href="/products/{{number}}/items"><span class="product-name">{{name}}</span></a>
+        <br/>
+        <span class="product-description">{{description}}</span>
+      </div>
+    </li>
+{{/each}}
+  </ul>
+{{/none}}
+</div>
+</body>
+</html>

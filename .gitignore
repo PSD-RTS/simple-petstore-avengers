@@ -11,3 +11,5 @@ reports
 Gemfile.lock
 build
 .gradle
+*.classpath
+*.project

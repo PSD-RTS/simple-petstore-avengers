@@ -68,3 +68,10 @@ or
 If you use IntelliJ, you can generate your project using:
 
 `buildr idea`
+
+## Eclipse
+
+If you use Eclipse, you can generate the projects file using
+
+`gradle eclipse`
+

@@ -8,13 +8,14 @@ import com.vtence.molecule.lib.SystemClock;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
 public class ApacheCommonLogger extends AbstractMiddleware {
 
     private static final String COMMON_LOG_FORMAT = "%s - %s [%s] \"%s %s %s\" %s %s";
-    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z");
+    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH);
 
     private final Logger logger;
     private final Clock clock;
@@ -36,7 +37,7 @@ public class ApacheCommonLogger extends AbstractMiddleware {
 
     public void handle(Request request, Response response) throws Exception {
         forward(request, response);
-        String msg = String.format(COMMON_LOG_FORMAT,
+        String msg = String.format(Locale.ENGLISH, COMMON_LOG_FORMAT,
                 request.remoteIp(),
                 "-",
                 currentTime(),

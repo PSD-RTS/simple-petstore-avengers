@@ -3,12 +3,14 @@ package org.testinfected.petstore.controllers;
 import com.vtence.molecule.Application;
 import com.vtence.molecule.Request;
 import com.vtence.molecule.Response;
+
 import org.testinfected.petstore.View;
 import org.testinfected.petstore.product.AttachmentStorage;
 import org.testinfected.petstore.product.Product;
 import org.testinfected.petstore.product.ProductCatalog;
 import org.testinfected.petstore.views.Products;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListProducts implements Application {
@@ -25,7 +27,13 @@ public class ListProducts implements Application {
 
     public void handle(Request request, Response response) throws Exception {
         String keyword = request.parameter("keyword");
-        List<Product> found = productCatalog.findByKeyword(keyword);
+        List<Product> found = new ArrayList<Product>();
+        if(keyword != null){
+        	keyword = keyword.trim();
+        	if(keyword.length() > 0){
+        		found = productCatalog.findByKeyword(keyword);
+        	}
+        }
         view.render(response, new Products().matching(keyword)
                                                     .add(found)
                                                     .withPhotosIn(attachmentStorage)

@@ -25,5 +25,5 @@ dependencies {
 
 test {
     systemProperties 'web.root': project(':webapp').file('src/main/content')
-    systemProperties 'browser.driver': 'phantomjs'
+    systemProperties 'browser.driver': 'firefox'
 }

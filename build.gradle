@@ -1,7 +1,7 @@
 allprojects {
   apply plugin: 'java'
   apply plugin: 'application'
-  apply plugin: 'eclipse'
+  apply plugin: 'idea'
 
   group = 'org.testinfected.petstore'
   version = '0.2-SNAPSHOT'
@@ -18,7 +18,7 @@ ext {
   libs = [
           mysql             : 'mysql:mysql-connector-java:5.1.21',
           flyway            : 'com.googlecode.flyway:flyway-core:2.0',
-          cli               : 'com.vtence.cli:cli:1.1-SNAPSHOT',
+          cli               : 'com.vtence.cli:cli:1.1',
           simple            : 'org.simpleframework:simple:5.1.6',
           jmustache         : 'com.samskivert:jmustache:1.9',
 

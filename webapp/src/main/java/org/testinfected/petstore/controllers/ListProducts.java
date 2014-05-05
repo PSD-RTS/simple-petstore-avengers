@@ -27,7 +27,7 @@ public class ListProducts implements Application {
 
     public void handle(Request request, Response response) throws Exception {
         String keyword = request.parameter("keyword");
-        List<Product> found = new ArrayList<>();
+        List<Product> found = new ArrayList<Product>();
         if(keyword != null){
         	keyword = keyword.trim();
         	if(keyword.length() > 0){

@@ -81,4 +81,26 @@ public class ListProductsTest {
             allowing(productCatalog).findByKeyword(keyword); will(returnValue(searchResults));
         }});
     }
+    
+    @SuppressWarnings("unchecked")
+    @Test
+    public void emptyStringReturnsEmptyList() throws Exception {
+    	searchYields(
+                aProduct().withNumber("LAB-1234").named("Labrador").describedAs("Friendly dog").withPhoto("labrador.png"),
+                aProduct().describedAs("Guard dog"));
+    	request.addParameter("keyword", "");
+    	listProducts.handle(request, response);
+        view.assertRenderedWith(productsFound(new ArrayList<Product>()));
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Test
+    public void trimedStringReturnsEmptyList() throws Exception {
+    	searchYields(
+                aProduct().withNumber("LAB-1234").named("Labrador").describedAs("Friendly dog").withPhoto("labrador.png"),
+                aProduct().describedAs("Guard dog"));
+    	request.addParameter("keyword", "   ");
+    	listProducts.handle(request, response);
+        view.assertRenderedWith(productsFound(new ArrayList<Product>()));
+    }
 }

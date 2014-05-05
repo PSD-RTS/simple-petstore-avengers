@@ -435,3 +435,7 @@ fieldset#billing-address {
 	margin-right: 5px;
 	line-height: 40px;
 }
+
+#list-people ul {
+    list-style: none;
+}

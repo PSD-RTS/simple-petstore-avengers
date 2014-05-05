@@ -44,4 +44,12 @@ public class AboutPageTest {
         assertThat("about page has not 6 developer", elementAbout, hasSelector("#list-people li" , hasSize(6)));
 
     }
+
+    @Test public void
+    hasDeveloperImage() {
+        assertThat("has image", elementAbout, hasSelector("#list-people li",hasChild(hasTag("img"))));
+
+
+
+    }
 }

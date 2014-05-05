@@ -28,15 +28,16 @@ public class ListProducts implements Application {
     public void handle(Request request, Response response) throws Exception {
         String keyword = request.parameter("keyword");
         List<Product> found = new ArrayList<Product>();
-        if(keyword != null){
-        	keyword = keyword.trim();
-        	if(keyword.length() > 0){
-        		found = productCatalog.findByKeyword(keyword);
-        	}
+        if(!isBlank(keyword)){
+        	found = productCatalog.findByKeyword(keyword);
         }
         view.render(response, new Products().matching(keyword)
                                                     .add(found)
                                                     .withPhotosIn(attachmentStorage)
         );
     }
+
+	private boolean isBlank(String keyword) {
+		return keyword == null || keyword.trim().length() == 0;
+	}
 }

@@ -2,6 +2,7 @@ package test.unit.org.testinfected.petstore.controllers;
 
 import com.vtence.molecule.support.MockRequest;
 import com.vtence.molecule.support.MockResponse;
+
 import org.hamcrest.Matcher;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
@@ -14,10 +15,12 @@ import org.testinfected.petstore.product.AttachmentStorage;
 import org.testinfected.petstore.product.Product;
 import org.testinfected.petstore.product.ProductCatalog;
 import org.testinfected.petstore.views.Products;
+
 import test.support.org.testinfected.petstore.builders.Builder;
 import test.support.org.testinfected.petstore.web.MockView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -82,25 +85,23 @@ public class ListProductsTest {
         }});
     }
     
-    @SuppressWarnings("unchecked")
     @Test
-    public void emptyStringReturnsEmptyList() throws Exception {
-    	searchYields(
-                aProduct().withNumber("LAB-1234").named("Labrador").describedAs("Friendly dog").withPhoto("labrador.png"),
-                aProduct().describedAs("Guard dog"));
+    public void emptySearchKeywordRendersNoProduct() throws Exception {
+    	context.checking(new Expectations() {{
+    		never(productCatalog).findByKeyword(with(any(String.class)));
+    	}});
     	request.addParameter("keyword", "");
     	listProducts.handle(request, response);
-        view.assertRenderedWith(productsFound(new ArrayList<Product>()));
+        view.assertRenderedWith(productsFound(Collections.<Product>emptyList()));
     }
     
-    @SuppressWarnings("unchecked")
     @Test
-    public void trimedStringReturnsEmptyList() throws Exception {
-    	searchYields(
-                aProduct().withNumber("LAB-1234").named("Labrador").describedAs("Friendly dog").withPhoto("labrador.png"),
-                aProduct().describedAs("Guard dog"));
+    public void blankSearchKeywordRendersNoProduct() throws Exception {
+    	context.checking(new Expectations() {{
+    		never(productCatalog).findByKeyword(with(any(String.class)));
+    	}});
     	request.addParameter("keyword", "   ");
     	listProducts.handle(request, response);
-        view.assertRenderedWith(productsFound(new ArrayList<Product>()));
+        view.assertRenderedWith(productsFound(Collections.<Product>emptyList()));
     }
 }

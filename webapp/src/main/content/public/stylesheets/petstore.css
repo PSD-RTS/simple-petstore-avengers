@@ -134,7 +134,12 @@ body.petstore {
 
 #tab.cart {
 	margin-top: -1px;
-	margin-left: 875px;
+	margin-left: 950px;
+}
+
+#tab.about {
+    margin-top: -1px;
+    margin-left: 875px;
 }
 
 #products {

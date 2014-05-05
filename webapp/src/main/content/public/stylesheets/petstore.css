@@ -58,6 +58,7 @@ body.petstore {
 	position: absolute;
 	top: 73px;
 	left: 740px;
+	width: 240px;
 }
 
 #header ul li {

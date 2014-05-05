@@ -39,8 +39,7 @@ public class Pages {
         return page("home");
     }
 
-    public View<Void> about() {
-        return page("about");
+    public View<Void> about() { return page("about");
     }
 
     public View<Order> order() {

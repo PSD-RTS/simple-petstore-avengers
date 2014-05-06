@@ -30,9 +30,13 @@ public class OrdersDatabase implements OrderBook {
     }
 
     public Order find(OrderNumber orderNumber) {
-        Order order = findOrder(orderNumber);
-        addLinesToOrder(order, findLineItemsOf(order));
-        return order;
+
+            Order order = findOrder(orderNumber);
+            if (order == null)
+                return null ;
+            addLinesToOrder(order, findLineItemsOf(order));
+            return order;
+
     }
 
     private void addLinesToOrder(Order order, List<LineItem> lineItems) {

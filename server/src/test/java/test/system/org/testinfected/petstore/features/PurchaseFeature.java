@@ -42,7 +42,7 @@ public class PurchaseFeature {
         application.showsOrderedItems(
                 item("11111111", "Male Adult", "599.00"), item("22222222", "Female Adult", "649.00"));
         application.showsBillingInformation("John", "Doe", "jdoe@gmail.com");
-        application.showsCreditCardDetails("Visa", "4111111111111111", "12/12");
+        application.showsCreditCardDetails("Visa", "XXXX-XXXX-XXXX-1111", "12/12");
     }
 
     private void havingRetrieversInStock() throws IOException {

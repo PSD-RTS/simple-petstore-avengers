@@ -28,6 +28,7 @@ public class CatalogAdministrationFeature {
         application.showsProductInCatalog("LIZ-0001", "Iguana");
         application.showsNoItemAvailableFor("Iguana");
     }
+    
 
     @Test public void
     addingItemsToInventory() throws IOException {

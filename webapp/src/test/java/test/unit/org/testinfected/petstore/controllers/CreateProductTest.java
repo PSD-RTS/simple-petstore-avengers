@@ -23,16 +23,14 @@ public class CreateProductTest {
     MockRequest request = new MockRequest();
     MockResponse response = new MockResponse();
 
-    @Before public void
-    addProductDetailsToRequest() {
+
+    @Test public void
+    makesProductProcurementRequestAndRespondsWithCreated() throws Exception {
         request.addParameter("number", "LAB-1234");
         request.addParameter("name", "Labrador");
         request.addParameter("description", "Friendly Dog");
         request.addParameter("photo", "labrador.jpg");
-    }
-
-    @Test public void
-    makesProductProcurementRequestAndRespondsWithCreated() throws Exception {
+        
         context.checking(new Expectations() {{
             oneOf(requestHandler).addProductToCatalog(with("LAB-1234"), with("Labrador"), with("Friendly Dog"), with("labrador.jpg"));
         }});
@@ -43,6 +41,11 @@ public class CreateProductTest {
 
     @Test public void
     reportsResourceConflictWhenProductAlreadyExists() throws Exception {
+        request.addParameter("number", "LAB-1234");
+        request.addParameter("name", "Labrador");
+        request.addParameter("description", "Friendly Dog");
+        request.addParameter("photo", "labrador.jpg");
+        
         context.checking(new Expectations() {{
             oneOf(requestHandler).addProductToCatalog(with(any(String.class)), with(any(String.class)), with(any(String.class)), with(any(String.class))); will(throwException(new DuplicateProductException(aProduct().build())));
         }});
@@ -50,4 +53,16 @@ public class CreateProductTest {
         createProduct.handle(request, response);
         response.assertStatus(HttpStatus.CONFLICT);
     }
+    
+    @Test public void
+    reportsResourceConflictWhenInvalidProductNumber() throws Exception {
+        request.addParameter("number", "1234");
+        request.addParameter("name", "Labrador");
+        request.addParameter("description", "Friendly Dog");
+        request.addParameter("photo", "labrador.jpg");
+        
+        createProduct.handle(request, response);
+        response.assertStatus(HttpStatus.NOT_ACCEPTABLE);
+    }
+    
 }

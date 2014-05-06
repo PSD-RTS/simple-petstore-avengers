@@ -67,8 +67,6 @@ public class OrdersDatabaseTest {
 
     @Test public void
     returnNullWhenNumberIsIncorrect() throws Exception {
-        given(anOrder().withNumber("00000000"));
-
         Order match = orderDatabase.find(new OrderNumber("10000000"));
         assertThat("match", match, nullValue());
     }

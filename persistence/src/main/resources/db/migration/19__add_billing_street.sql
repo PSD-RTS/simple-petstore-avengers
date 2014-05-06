@@ -1,0 +1,1 @@
+alter table payments add column street varchar(256);

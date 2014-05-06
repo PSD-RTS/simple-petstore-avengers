@@ -3,6 +3,7 @@ package test.support.org.testinfected.petstore.builders;
 import org.testinfected.petstore.billing.Address;
 import org.testinfected.petstore.billing.CreditCardDetails;
 import org.testinfected.petstore.billing.CreditCardType;
+import org.testinfected.petstore.billing.PaymentMethod;
 
 import static test.support.org.testinfected.petstore.builders.AddressBuilder.anAddress;
 

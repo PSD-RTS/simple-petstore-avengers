@@ -50,4 +50,15 @@ public class CreateProductTest {
         createProduct.handle(request, response);
         response.assertStatus(HttpStatus.CONFLICT);
     }
+    
+    @Test public void
+    reportsResourceConflictWhenInvalidProductNumber() throws Exception {
+        context.checking(new Expectations() {{
+            oneOf(requestHandler).addProductToCatalog(with("0001"), with(any(String.class)), with(any(String.class)), with(any(String.class))); will(throwException(new DuplicateProductException(aProduct().build())));
+        }});
+
+        createProduct.handle(request, response);
+        response.assertStatus(HttpStatus.NOT_ACCEPTABLE);
+    }
+    
 }

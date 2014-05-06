@@ -35,6 +35,10 @@ public class Pages {
         return page("cart");
     }
 
+    public View<Void> adminproduct() {
+        return page("adminproduct");
+    }
+    
     public View<Void> home() {
         return page("home");
     }

@@ -2,6 +2,9 @@ package org.testinfected.petstore.product;
 
 import java.io.Serializable;
 
+import org.testinfected.petstore.validation.Constraint;
+import org.testinfected.petstore.validation.Validates;
+
 public class Product implements Serializable {
 
     public static final String MISSING_PHOTO = "missing.png";
@@ -9,19 +12,19 @@ public class Product implements Serializable {
     @SuppressWarnings("unused")
 	private long id;
 
-    private final String number;
+    private final Constraint<String> number;
     private final String name;
 
     private String description;
     private Attachment photo;
 
     public Product(String number, String name) {
-        this.number = number;
-		this.name = name;
+        this.number = Validates.both( Validates.notEmpty(number), Validates.correctnessOf(number) );
+        this.name = name;
 	}
 
     public String getNumber() {
-		return number;
+		return number.get();
 	}
 
 	public String getName() {
@@ -55,18 +58,18 @@ public class Product implements Serializable {
 
         Product product = (Product) o;
 
-        if (number != null ? !number.equals(product.number) : product.number != null) return false;
+        if (getNumber() != null ? !getNumber().equals(product.getNumber()) : product.getNumber() != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return number != null ? number.hashCode() : 0;
+        return getNumber() != null ? getNumber().hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return number + " (" + name + ")"; 
+        return getNumber() + " (" + name + ")"; 
 	}
 }

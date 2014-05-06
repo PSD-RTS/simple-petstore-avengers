@@ -14,15 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
-import static org.testinfected.hamcrest.dom.DomMatchers.anElement;
-import static org.testinfected.hamcrest.dom.DomMatchers.hasAttribute;
-import static org.testinfected.hamcrest.dom.DomMatchers.hasChild;
-import static org.testinfected.hamcrest.dom.DomMatchers.hasChildren;
-import static org.testinfected.hamcrest.dom.DomMatchers.hasId;
-import static org.testinfected.hamcrest.dom.DomMatchers.hasNoSelector;
-import static org.testinfected.hamcrest.dom.DomMatchers.hasTag;
-import static org.testinfected.hamcrest.dom.DomMatchers.hasText;
-import static org.testinfected.hamcrest.dom.DomMatchers.hasUniqueSelector;
+import static org.testinfected.hamcrest.dom.DomMatchers.*;
 import static test.support.org.testinfected.petstore.builders.CartBuilder.aCart;
 import static test.support.org.testinfected.petstore.builders.ItemBuilder.anItem;
 import static test.support.org.testinfected.petstore.web.OfflineRenderer.render;
@@ -80,7 +72,7 @@ public class HeaderTest {
         data.put("section", "cart");
         header = renderHeader().with(page.composedOf(data).withCart(aCart().build())).asDom();
         assertThat("header", header, allOf(
-                hasUniqueSelector("#home.overline.cart"),
+                hasUniqueSelector("#home", hasClassName("overline cart")),
                 hasUniqueSelector("#shopping-cart.overline.cart"),
                 hasUniqueSelector("#tab.cart", hasChild(allOf(hasTag("img"), hasAttribute("src", "/images/tab.png"))))));
     }
@@ -97,5 +89,15 @@ public class HeaderTest {
 
     private OfflineRenderer renderHeader() {
         return render(HEADER_TEMPLATE).from(WebRoot.layouts());
+    }
+
+
+    @Test public void
+    aboutLinkIsHighlight() {
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("section", "about");
+        header = renderHeader().with(page.composedOf(data)).asDom();
+        assertThat("header hightlight about", header, allOf(
+                hasUniqueSelector("#about", hasClassName("overline about"))));
     }
 }

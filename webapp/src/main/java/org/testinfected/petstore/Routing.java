@@ -71,6 +71,7 @@ public class Routing implements Application {
             post("/orders").to(new PlaceOrder(cashier, pages.checkout(), messages));
             delete("/logout").to(new Logout());
             get("/about").to(new StaticView(pages.about()));
+            get("/adminproduct").to(new StaticView(pages.adminproduct()));
             map("/").to(new StaticView(pages.home()));
         }});
 

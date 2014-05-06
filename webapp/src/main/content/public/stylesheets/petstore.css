@@ -119,11 +119,11 @@ body.petstore {
 	padding-top: 2px;
 }
 
-#home.overline, #shopping-cart.overline.cart {
+#home.overline.home, #shopping-cart.overline.cart, #about.overline.about {
 	border-top: solid #c6ee22 2px;
 }
 
-#home.overline.cart, #shopping-cart.overline {
+#home.overline.cart, #shopping-cart.overline, #about.overline. {
 	border-top: none;
 }
 
@@ -134,7 +134,12 @@ body.petstore {
 
 #tab.cart {
 	margin-top: -1px;
-	margin-left: 875px;
+	margin-left: 950px;
+}
+
+#tab.about {
+    margin-top: -1px;
+    margin-left: 875px;
 }
 
 #products {
@@ -431,6 +436,24 @@ fieldset#billing-address {
 	line-height: 40px;
 }
 
-#list-people ul {
+#list-people {
     list-style: none;
+}
+
+#list-people li {
+    clear: both;
+}
+
+#list-people img {
+    float: left;
+}
+
+#list-people span {
+    float: left;
+    margin-left: 10px;
+    
+}
+
+.clearing {
+    clear:both;
 }

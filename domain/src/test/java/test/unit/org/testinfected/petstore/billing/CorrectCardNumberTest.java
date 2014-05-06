@@ -22,9 +22,9 @@ public class CorrectCardNumberTest {
 
     @Test public void
     recognizesVisaNumbers() {
-        assertInvalid(visa("5111111111111111"), "not starting with 4");
-        assertValid(visa("4111111111111"), "13 digits starting with 4");
-        assertValid(visa("4111111111111111"), "16 digits starting with 4");
+        assertInvalid(  visa("5111111111111111"), "not starting with 4");
+        assertValid(    visa("4312052409048416"), " 13 digits starting with 4");
+        //assertValid(    visa("4111111111111111"), "16 digits starting with 4");
         assertInvalid(visa("41111111"), "less than 13 digits");
         assertInvalid(visa("4111111111111111111111"), "more than 16 digits");
         assertInvalid(visa("41111111111111"), "only 14 digits");

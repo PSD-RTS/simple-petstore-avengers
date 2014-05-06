@@ -14,12 +14,14 @@ public class CreditCardDetails extends PaymentMethod implements Serializable {
     private final NotNull<String> cardExpiryDate;
     private final Valid<Address> billingAddress;
 
+
     public CreditCardDetails(CreditCardType cardType, String cardNumber, String cardExpiryDate, Address billingAddress) {
         this.cardType = cardType;
         this.cardNumber = Validates.both(Validates.notEmpty(cardNumber), Validates.correctnessOf(cardType, cardNumber));
         this.cardExpiryDate = Validates.notNull(cardExpiryDate);
         this.billingAddress = Validates.validityOf(billingAddress);
     }
+
 
     public CreditCardType getCardType() {
         return cardType;
@@ -56,4 +58,8 @@ public class CreditCardDetails extends PaymentMethod implements Serializable {
     public String getEmail() {
         return billingAddress.get().getEmailAddress();
     }
+
+    public String getStreet() {return billingAddress.get().getStreet();}
+
+    public String getCity() {return billingAddress.get().getCity();}
 }

@@ -9,11 +9,23 @@ public class Address implements Serializable {
     private final NotNull<String> firstName;
     private final NotNull<String> lastName;
     private final String emailAddress;
+    private final String street;
+    private final String city;
 
     public Address(String firstName, String lastName, String emailAddress) {
         this.firstName = Validates.notNull(firstName);
         this.lastName = Validates.notNull(lastName);
         this.emailAddress = emailAddress;
+        this.street = null;
+        this.city = null;
+    }
+
+    public Address(String firstName, String lastName, String emailAddress, String street, String city) {
+        this.firstName = Validates.notNull(firstName);
+        this.lastName = Validates.notNull(lastName);
+        this.emailAddress = emailAddress;
+        this.street = street;
+        this.city = city;
     }
 
     public String getFirstName() {
@@ -50,4 +62,13 @@ public class Address implements Serializable {
         result = 31 * result + (emailAddress != null ? emailAddress.hashCode() : 0);
         return result;
     }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
 }

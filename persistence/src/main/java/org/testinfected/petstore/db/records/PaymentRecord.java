@@ -25,7 +25,8 @@ public class PaymentRecord extends AbstractRecord<PaymentMethod> {
     private final Column<String> firstName = payments.STRING("billing_first_name");
     private final Column<String> lastName = payments.STRING("billing_last_name");
     private final Column<String> email = payments.STRING("billing_email");
-
+    private final Column<String> street = payments.STRING("street");
+    private final Column<String> city = payments.STRING("city");
     public static final String CREDIT_CARD = "credit_card";
 
     public static Table<PaymentMethod> buildTable() {
@@ -38,11 +39,12 @@ public class PaymentRecord extends AbstractRecord<PaymentMethod> {
 
         CreditCardDetails creditCard = new CreditCardDetails(
                 CreditCardType.valueOf(cardType.get(rs)), cardNumber.get(rs), cardExpiryDate.get(rs),
-                new Address(firstName.get(rs), lastName.get(rs), email.get(rs))
+                new Address(firstName.get(rs), lastName.get(rs), email.get(rs), street.get(rs), city.get(rs))
         );
         idOf(creditCard).set(id.get(rs));
         return creditCard;
     }
+
 
     @Override
     public void dehydrate(PreparedStatement st, PaymentMethod payment) throws SQLException {
@@ -55,5 +57,7 @@ public class PaymentRecord extends AbstractRecord<PaymentMethod> {
         cardNumber.set(st, creditCard.getCardNumber());
         cardExpiryDate.set(st, creditCard.getCardExpiryDate());
         paymentType.set(st, CREDIT_CARD);
+        street.set(st, creditCard.getStreet());
+        city.set(st, creditCard.getCity());
     }
 }

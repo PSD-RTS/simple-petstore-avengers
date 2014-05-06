@@ -453,3 +453,7 @@ fieldset#billing-address {
     margin-left: 10px;
     
 }
+
+.clearing {
+    clear:both;
+}

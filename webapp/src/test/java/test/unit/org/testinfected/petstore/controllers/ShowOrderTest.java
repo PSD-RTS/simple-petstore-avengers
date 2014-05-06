@@ -42,6 +42,22 @@ public class ShowOrderTest {
         view.assertRenderedWith(sameOrderAs(order));
     }
 
+    @Test public void
+    redirectToHomepageWhenOrderNumberIsUnknown() throws Exception {
+
+        final String unknownNumber ="00000000";
+
+        context.checking(new Expectations() {{
+            allowing(orderBook).find(new OrderNumber(unknownNumber)); will(returnValue(null));
+        }});
+
+        request.addParameter("number", unknownNumber);
+
+        showOrder.handle(request, response);
+        response.assertRedirectedTo("/");
+    }
+
+
     private Matcher<Object> sameOrderAs(Order order) {
         return Matchers.<Object>sameInstance(order);
     }

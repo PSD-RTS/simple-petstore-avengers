@@ -65,6 +65,13 @@ public class OrdersDatabaseTest {
         assertThat("match", match, orderWithNumber("00000100"));
     }
 
+    @Test public void
+    returnNullWhenNumberIsIncorrect() throws Exception {
+        Order match = orderDatabase.find(new OrderNumber("10000000"));
+        assertThat("match", match, nullValue());
+    }
+
+
     @SuppressWarnings("unchecked")
     @Test public void
     canRoundTripOrdersWillCompleteDetails() throws Exception {

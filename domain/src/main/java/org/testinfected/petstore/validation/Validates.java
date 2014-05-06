@@ -2,6 +2,7 @@ package org.testinfected.petstore.validation;
 
 import org.testinfected.petstore.billing.CorrectCardNumber;
 import org.testinfected.petstore.billing.CreditCardType;
+import org.testinfected.petstore.product.CorrectProductNumber;
 
 public final class Validates {
 
@@ -21,6 +22,10 @@ public final class Validates {
         return new CorrectCardNumber(cardType, cardNumber);
     }
 
+    public static CorrectProductNumber correctnessOf(String productNumber) {
+        return new CorrectProductNumber(productNumber);
+    }
+    
     public static <T> Both<T> both(Constraint<T> left, Constraint<T> right) {
         return new Both<T>(left, right);
     }

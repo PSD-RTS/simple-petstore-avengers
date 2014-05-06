@@ -12,13 +12,6 @@ public class Address implements Serializable {
     private final String street;
     private final String city;
 
-    public Address(String firstName, String lastName, String emailAddress) {
-        this.firstName = Validates.notNull(firstName);
-        this.lastName = Validates.notNull(lastName);
-        this.emailAddress = emailAddress;
-        this.street = null;
-        this.city = null;
-    }
 
     public Address(String firstName, String lastName, String emailAddress, String street, String city) {
         this.firstName = Validates.notNull(firstName);

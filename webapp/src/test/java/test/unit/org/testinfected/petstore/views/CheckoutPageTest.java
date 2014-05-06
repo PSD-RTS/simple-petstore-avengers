@@ -5,8 +5,10 @@ import org.junit.Test;
 import org.testinfected.petstore.billing.CreditCardDetails;
 import org.testinfected.petstore.billing.CreditCardType;
 import org.testinfected.petstore.helpers.ErrorMessages;
+import org.testinfected.petstore.order.Order;
 import org.testinfected.petstore.views.Checkout;
 import org.w3c.dom.Element;
+
 import test.support.org.testinfected.petstore.builders.AddressBuilder;
 import test.support.org.testinfected.petstore.web.OfflineRenderer;
 import test.support.org.testinfected.petstore.web.WebRoot;
@@ -28,6 +30,7 @@ import static org.testinfected.hamcrest.dom.DomMatchers.matches;
 import static org.testinfected.hamcrest.dom.DomMatchers.matchesInAnyOrder;
 import static test.support.org.testinfected.petstore.builders.AddressBuilder.anAddress;
 import static test.support.org.testinfected.petstore.builders.CreditCardBuilder.aVisa;
+import static test.support.org.testinfected.petstore.builders.OrderBuilder.anOrder;
 import static test.support.org.testinfected.petstore.web.OfflineRenderer.render;
 
 public class CheckoutPageTest {

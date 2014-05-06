@@ -1,13 +1,5 @@
 package test.unit.org.testinfected.petstore.views;
 
-import org.hamcrest.Matcher;
-import org.junit.Test;
-import org.w3c.dom.Element;
-import test.support.org.testinfected.petstore.builders.ItemBuilder;
-import test.support.org.testinfected.petstore.builders.OrderBuilder;
-import test.support.org.testinfected.petstore.web.OfflineRenderer;
-import test.support.org.testinfected.petstore.web.WebRoot;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.testinfected.hamcrest.dom.DomMatchers.hasAttribute;
@@ -23,6 +15,15 @@ import static test.support.org.testinfected.petstore.builders.CreditCardBuilder.
 import static test.support.org.testinfected.petstore.builders.ItemBuilder.anItem;
 import static test.support.org.testinfected.petstore.builders.OrderBuilder.anOrder;
 import static test.support.org.testinfected.petstore.web.OfflineRenderer.render;
+
+import org.hamcrest.Matcher;
+import org.junit.Test;
+import org.w3c.dom.Element;
+
+import test.support.org.testinfected.petstore.builders.ItemBuilder;
+import test.support.org.testinfected.petstore.builders.OrderBuilder;
+import test.support.org.testinfected.petstore.web.OfflineRenderer;
+import test.support.org.testinfected.petstore.web.WebRoot;
 
 public class OrderPageTest {
 
@@ -92,10 +93,10 @@ public class OrderPageTest {
     @Test public void
     displaysPaymentDetails() {
         orderPage = renderOrderPage().with(order.paidWith(
-                aVisa().withNumber("9999 9999 9999").withExpiryDate("12/12"))).asDom();
+                aVisa().withNumber("4111111111111111").withExpiryDate("12/12"))).asDom();
         assertThat("order page", orderPage, hasSelector("#payment-details span", matchesInAnyOrder(
                 hasText("Visa"),
-                hasText("9999 9999 9999"),
+                hasText("XXXX-XXXX-XXXX-1111"),
                 hasText("12/12"))));
     }
 
@@ -115,5 +116,10 @@ public class OrderPageTest {
 
     private OfflineRenderer renderOrderPage() {
         return render(ORDER_TEMPLATE).from(WebRoot.pages());
+    }
+       
+    @Test public void
+    areLastDigitsOfCreditCardNumberValid() {
+    	
     }
 }

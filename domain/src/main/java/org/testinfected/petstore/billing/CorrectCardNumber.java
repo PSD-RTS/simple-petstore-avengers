@@ -1,5 +1,6 @@
 package org.testinfected.petstore.billing;
 
+import org.testinfected.petstore.billing.validator.Luhn;
 import org.testinfected.petstore.validation.Constraint;
 import org.testinfected.petstore.validation.Path;
 import org.testinfected.petstore.validation.Report;
@@ -33,6 +34,7 @@ public class CorrectCardNumber implements Constraint<String>, Serializable {
 
     private boolean satisfied() {
         if (cardNumber == null) return false;
+        //if(!Luhn.validate(cardNumber)) return false;
         if (cardType.equals(CreditCardType.visa)) return VISA_PATTERN.matcher(cardNumber).matches();
         if (cardType.equals(CreditCardType.mastercard)) return MASTERCARD_PATTERN.matcher(cardNumber).matches();
         return AMEX_PATTERN.matcher(cardNumber).matches();

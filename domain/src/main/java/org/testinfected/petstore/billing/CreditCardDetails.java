@@ -1,11 +1,11 @@
 package org.testinfected.petstore.billing;
 
+import java.io.Serializable;
+
 import org.testinfected.petstore.validation.Constraint;
-import org.testinfected.petstore.validation.Validates;
 import org.testinfected.petstore.validation.NotNull;
 import org.testinfected.petstore.validation.Valid;
-
-import java.io.Serializable;
+import org.testinfected.petstore.validation.Validates;
 
 public class CreditCardDetails extends PaymentMethod implements Serializable {
 
@@ -31,6 +31,14 @@ public class CreditCardDetails extends PaymentMethod implements Serializable {
 
     public String getCardNumber() {
         return cardNumber.get();
+    }
+    
+    public String getMaskedCardNumber(){
+    	String numStr = cardNumber.get();
+    	if (numStr != null && numStr.length() >= 4) {
+    		return "XXXX-XXXX-XXXX-" + numStr.substring(numStr.length()-4, numStr.length());
+    	}
+    	return numStr;
     }
 
     public String getCardExpiryDate() {

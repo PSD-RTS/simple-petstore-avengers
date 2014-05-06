@@ -1,6 +1,7 @@
 package test.unit.org.testinfected.petstore.billing;
 
 import org.junit.Test;
+import org.testinfected.petstore.billing.CreditCardDetails;
 
 import static org.hamcrest.CoreMatchers.describedAs;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -47,5 +48,12 @@ public class CreditCardDetailsTest {
     @Test public void
     areValidWithAllRequiredDetails() {
         assertThat("valid card", validationOf(validCreditCardDetails()), succeeds());
+    }
+    
+    @Test public void
+    isCreditCardNumberMasked() {
+    	CreditCardDetails detail  = aVisa().withNumber("1111111111119876").build();
+    	String cardNumber = detail.getCardNumber();
+    	assertThat("valid card", ("XXXX-XXXX-XXXX-" + cardNumber.substring(cardNumber.length()-4, cardNumber.length())).equals(detail.getMaskedCardNumber()));
     }
 }

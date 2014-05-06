@@ -436,6 +436,20 @@ fieldset#billing-address {
 	line-height: 40px;
 }
 
-#list-people ul {
+#list-people {
     list-style: none;
+}
+
+#list-people li {
+    clear: both;
+}
+
+#list-people img {
+    float: left;
+}
+
+#list-people span {
+    float: left;
+    margin-left: 10px;
+    
 }

@@ -30,9 +30,9 @@ public class AddressTest {
                 withState("Geneve").
                 withCountry("Suisse");
     	AddressBuilder shouldMatch = anAddress().
-                withFirstName("John").
-                withLastName("Doe").
-                withEmail("jdoe@gmail.com")
+                withFirstName("Jack").
+                withLastName("Johnson").
+                withEmail("jack@gmail.com")
                 .withStreet("rue de la rue").
                 withCity("Geneve").
                 withZipcode("1203").
@@ -48,9 +48,9 @@ public class AddressTest {
                 withState("Geneve").
                 withCountry("Suisse");
     	
-        assertThat("address", address, equalTo(shouldMatch));
-        assertThat("hash code", address.hashCode(), equalTo(shouldMatch.hashCode()));
-        assertThat("address ", address, not(equalTo(shouldNotMatch)));
+        assertThat("address", address.build(), equalTo(shouldMatch.build()));
+        assertThat("hash code", address.build().hashCode(), equalTo(shouldMatch.build().hashCode()));
+        assertThat("address ", address.build(), not(equalTo(shouldNotMatch.build())));
     }
 
     @Test public void

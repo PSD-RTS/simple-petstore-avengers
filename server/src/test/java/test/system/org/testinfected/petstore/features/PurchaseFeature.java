@@ -3,6 +3,7 @@ package test.system.org.testinfected.petstore.features;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import test.support.org.testinfected.petstore.web.ApplicationDriver;
 import test.support.org.testinfected.petstore.web.TestEnvironment;
 
@@ -36,7 +37,7 @@ public class PurchaseFeature {
         application.buyItem("Golden Retriever", "22222222");
         application.showsTotalToPay(totalPrice);
 
-        application.pay("John", "Doe", "jdoe@gmail.com", "Visa", "4111111111111111", "12/12");
+        application.pay("John", "Doe", "jdoe@gmail.com", "4 rue de la rue", "Annecy", "74000", "Haute Savoie", "France", "Visa", "4111111111111111", "12/12");
         application.showsCartIsEmpty();
         application.showsOrderTotal("1248.00");
         application.showsOrderedItems(

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 public class Checkout {
 
-    private static final Address UNKNOWN_ADDRESS = new Address("", "", "","","");
+    private static final Address UNKNOWN_ADDRESS = new Address("", "", "","","", "", "", "");
     private static final CreditCardDetails MISSING_CARD_DETAILS =
             new CreditCardDetails(CreditCardType.amex, "", "", UNKNOWN_ADDRESS);
 
@@ -49,6 +49,10 @@ public class Checkout {
     public String getFirstName() {
         return details.getFirstName();
     }
+    
+    public String getLastName() {
+        return details.getLastName();
+    }
 
     public String getCardName() {
         return details.getCardCommonName();
@@ -58,8 +62,24 @@ public class Checkout {
         return details.getEmail();
     }
 
-    public String getLastName() {
-        return details.getLastName();
+    public String getStreet() {
+        return details.getStreet();
+    }
+    
+    public String getCity() {
+        return details.getCity();
+    }
+    
+    public String getZipcode() {
+        return details.getZipcode();
+    }
+    
+    public String getState() {
+        return details.getState();
+    }
+    
+    public String getCountry() {
+        return details.getCountry();
     }
 
     public Checkout withErrors(ErrorMessages messages) {

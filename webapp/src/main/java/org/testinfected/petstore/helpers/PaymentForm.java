@@ -21,7 +21,11 @@ public class PaymentForm extends Form {
                         request.parameter("last-name"),
                         request.parameter("email"),
                         request.parameter("street"),
-                        request.parameter("city"))));
+                        request.parameter("city"),
+                        request.parameter("zipcode"),
+                        request.parameter("state"),
+                        request.parameter("country")
+                        )));
     }
 
     private final Valid<CreditCardDetails> paymentDetails;

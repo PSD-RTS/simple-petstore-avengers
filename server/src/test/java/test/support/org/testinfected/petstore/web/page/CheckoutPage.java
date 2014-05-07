@@ -18,10 +18,15 @@ public class CheckoutPage extends Page {
         return this;
     }
 
-    public CheckoutPage willBillTo(String firstName, String lastName, String email) {
+    public CheckoutPage willBillTo(String firstName, String lastName, String email, String street, String city, String zipcode, String state, String country) {
         browser.element(id("first-name")).type(firstName);
         browser.element(id("last-name")).type(lastName);
         browser.element(id("email")).type(email);
+        browser.element(id("street")).type(street);
+        browser.element(id("city")).type(city);
+        browser.element(id("zipcode")).type(zipcode);
+        browser.element(id("state")).type(state);
+        browser.element(id("country")).type(country);
         return this;
     }
 

@@ -125,12 +125,14 @@ public class PlaceOrderTest {
     }
 
     private void fillOutFormWith(final CreditCardDetails paymentDetails) {
-        request.addParameter("first-name", paymentDetails.getFirstName());
-        request.addParameter("last-name", paymentDetails.getLastName());
-        request.addParameter("email", paymentDetails.getEmail());
+        request.addParameter("first-name",  paymentDetails.getFirstName());
+        request.addParameter("last-name",   paymentDetails.getLastName());
+        request.addParameter("email",       paymentDetails.getEmail());
         request.addParameter("card-number", paymentDetails.getCardNumber());
-        request.addParameter("card-type", paymentDetails.getCardType().toString());
+        request.addParameter("card-type",   paymentDetails.getCardType().toString());
         request.addParameter("expiry-date", paymentDetails.getCardExpiryDate());
+        request.addParameter("street",      paymentDetails.getStreet());
+        request.addParameter("city",        paymentDetails.getCity());
     }
 
     private Matcher<CreditCardDetails> samePaymentAs(CreditCardDetails paymentMethod) {

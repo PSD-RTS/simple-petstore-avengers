@@ -8,9 +8,9 @@ public class AddressBuilder implements Builder<Address> {
     private String lastName = "Doe";
     private String emailAddress = "jdoe@gmail.com";
     private String street = "Avenue Gare";
-    private String city = "Genève";
+    private String city = "Geneve";
     private String zipcode = "1203";
-    private String state = "Geneva";
+    private String state = "Geneve";
     private String country = "Suisse";
 
     public static AddressBuilder anAddress() {

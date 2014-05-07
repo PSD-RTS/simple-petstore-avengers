@@ -133,6 +133,9 @@ public class PlaceOrderTest {
         request.addParameter("expiry-date", paymentDetails.getCardExpiryDate());
         request.addParameter("street",      paymentDetails.getStreet());
         request.addParameter("city",        paymentDetails.getCity());
+        request.addParameter("country",      paymentDetails.getCountry());
+        request.addParameter("zipcode",        paymentDetails.getZipcode());
+        request.addParameter("state",        paymentDetails.getState());
     }
 
     private Matcher<CreditCardDetails> samePaymentAs(CreditCardDetails paymentMethod) {

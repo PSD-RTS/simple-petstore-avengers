@@ -1,0 +1,1 @@
+web: ./server/build/install/petstore/bin/petstore -e prod -p $PORT webapp/src/main/content

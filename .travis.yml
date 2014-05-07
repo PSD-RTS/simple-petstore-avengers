@@ -1,7 +1,6 @@
 language: java
 
 jdk:
-  - oraclejdk7
   - openjdk7
 
 env:
@@ -11,3 +10,8 @@ before_script:
   - mysql -e "create database petstore_test;"
   - mysql -e "create user 'testbot'@'localhost' identified by 'petstore'";
   - mysql -u root -e "grant all on petstore_test.* to 'testbot'@'localhost'";
+  
+deploy:
+  provider: heroku
+  app: apetshop
+  api_key: ed0425bf-635d-4af9-9ad1-cd89f4d6d3d7

@@ -97,6 +97,7 @@ public class PlaceOrderTest {
         return hasProperty("total", equalTo(amount));
     }
 
+    @SuppressWarnings("unchecked")
     private Matcher<Object> billWithPayment(CreditCardDetails payment) {
         return allOf(
                 hasProperty("cardNumber", equalTo(payment.getCardNumber())),
@@ -104,7 +105,12 @@ public class PlaceOrderTest {
                 hasProperty("cardExpiryDate", equalTo(payment.getCardExpiryDate())),
                 hasProperty("firstName", equalTo(payment.getFirstName())),
                 hasProperty("lastName", equalTo(payment.getLastName())),
-                hasProperty("email", equalTo(payment.getEmail())));
+                hasProperty("email", equalTo(payment.getEmail())),
+                hasProperty("street", equalTo(payment.getStreet())),
+                hasProperty("city", equalTo(payment.getCity())),
+                hasProperty("zipcode", equalTo(payment.getZipcode())),
+                hasProperty("state", equalTo(payment.getState())),
+                hasProperty("country", equalTo(payment.getCountry())));
     }
 
     private Matcher<Object> billWithErrors(Matcher<? super ErrorMessages>... messages) {
@@ -133,6 +139,9 @@ public class PlaceOrderTest {
         request.addParameter("expiry-date", paymentDetails.getCardExpiryDate());
         request.addParameter("street",      paymentDetails.getStreet());
         request.addParameter("city",        paymentDetails.getCity());
+        request.addParameter("zipcode",      paymentDetails.getStreet());
+        request.addParameter("state",        paymentDetails.getCity());
+        request.addParameter("country",      paymentDetails.getStreet());
     }
 
     private Matcher<CreditCardDetails> samePaymentAs(CreditCardDetails paymentMethod) {

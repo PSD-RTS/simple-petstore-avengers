@@ -21,19 +21,19 @@ public class AddressTest {
     @Test public void
     addressesMatchWhenAllPropertiesMatch() {
     	AddressBuilder address = anAddress().
-                withFirstName("Jack").
-                withLastName("Johnson").
-                withEmail("jack@gmail.com")
-                .withStreet("rue de la rue").
+    			withFirstName("John").
+                withLastName("Doe").
+                withEmail("jdoe@gmail.com").
+                withStreet("rue de la rue").
                 withCity("Geneve").
                 withZipcode("1203").
                 withState("Geneve").
                 withCountry("Suisse");
     	AddressBuilder shouldMatch = anAddress().
-                withFirstName("Jack").
-                withLastName("Johnson").
-                withEmail("jack@gmail.com")
-                .withStreet("rue de la rue").
+                withFirstName("John").
+                withLastName("Doe").
+                withEmail("jdoe@gmail.com").
+                withStreet("rue de la rue").
                 withCity("Geneve").
                 withZipcode("1203").
                 withState("Geneve").
@@ -41,8 +41,8 @@ public class AddressTest {
     	AddressBuilder shouldNotMatch = anAddress().
                 withFirstName("Jane").
                 withLastName("Doe").
-                withEmail("jdoe@gmail.com")
-                .withStreet("rue de la rue").
+                withEmail("jdoe@gmail.com").
+                withStreet("rue de la rue").
                 withCity("Geneve").
                 withZipcode("1203").
                 withState("Geneve").

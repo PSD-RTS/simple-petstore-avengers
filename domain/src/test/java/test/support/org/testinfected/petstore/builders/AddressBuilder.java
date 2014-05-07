@@ -8,7 +8,7 @@ public class AddressBuilder implements Builder<Address> {
     private String lastName = "Doe";
     private String emailAddress = "jdoe@gmail.com";
     private String street = "Avenue Gare";
-    private String city = "Genève";
+    private String city = "Genève"; 
 
     public static AddressBuilder anAddress() {
         return new AddressBuilder();

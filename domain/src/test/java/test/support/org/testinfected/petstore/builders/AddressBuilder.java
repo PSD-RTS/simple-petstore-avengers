@@ -8,7 +8,10 @@ public class AddressBuilder implements Builder<Address> {
     private String lastName = "Doe";
     private String emailAddress = "jdoe@gmail.com";
     private String street = "Avenue Gare";
-    private String city = "Genève"; 
+    private String city = "Genève";
+    private String zipcode = "1203";
+    private String state = "Geneva";
+    private String country = "Suisse";
 
     public static AddressBuilder anAddress() {
         return new AddressBuilder();
@@ -30,15 +33,31 @@ public class AddressBuilder implements Builder<Address> {
     }
 
     public Address build() {
-        return new Address(firstName, lastName, emailAddress, street, city);
+        return new Address(firstName, lastName, emailAddress, street, city, zipcode, state, country);
     }
 
     public AddressBuilder withStreet(String street) {
         this.street = street;
         return this;
     }
+    
     public AddressBuilder withCity(String city) {
         this.city = city;
+        return this;
+    }
+    
+    public AddressBuilder withZipcode(String zipcode) {
+        this.zipcode = zipcode;
+        return this;
+    }
+    
+    public AddressBuilder withState(String state) {
+        this.state = state;
+        return this;
+    }
+    
+    public AddressBuilder withCountry(String country) {
+        this.country = country;
         return this;
     }
 }

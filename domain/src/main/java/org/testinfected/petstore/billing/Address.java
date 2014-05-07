@@ -11,16 +11,35 @@ public class Address implements Serializable {
     private final String emailAddress;
     private final String street;
     private final String city;
+    private final String zipcode;
+    private final String state;
+    private final String country;
 
-    public Address(String firstName, String lastName, String emailAddress, String street, String city) {
+
+    public Address(String firstName, String lastName, String emailAddress, String street, String city, String zipcode, String state, String country) {
         this.firstName = Validates.notNull(firstName);
         this.lastName = Validates.notNull(lastName);
         this.emailAddress = emailAddress;
         this.street = street;
         this.city = city;
+        this.zipcode = zipcode;
+        this.state = state;
+        this.country = country;
     }
 
-    public String getFirstName() {
+    public String getZipcode() {
+		return zipcode;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public String getFirstName() {
         return firstName.get();
     }
 

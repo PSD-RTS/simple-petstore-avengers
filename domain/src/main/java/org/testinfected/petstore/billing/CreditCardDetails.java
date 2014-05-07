@@ -62,4 +62,10 @@ public class CreditCardDetails extends PaymentMethod implements Serializable {
     public String getStreet() {return billingAddress.get().getStreet();}
 
     public String getCity() {return billingAddress.get().getCity();}
+    
+    public String getZipcode() {return billingAddress.get().getZipcode();}
+
+    public String getState() {return billingAddress.get().getState();}
+
+    public String getCountry() {return billingAddress.get().getCountry();}
 }

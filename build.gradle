@@ -91,6 +91,7 @@ task coverage(type: JacocoReport) {
     }
 }
 
+applicationName = 'petstore'
 mainClassName = 'org.testinfected.petstore.Launcher'
 
 if (!project.hasProperty('env')) {
@@ -143,4 +144,10 @@ task 'db-reset'(type: JavaExec) {
   main = 'org.testinfected.petstore.Migrations'
   classpath = project(':server').sourceSets.main.runtimeClasspath
   args = ['-e', env, 'reset']
+}
+
+task stage(dependsOn: ['clean', project(':server').installApp])
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.12'
 }

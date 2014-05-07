@@ -1,3 +1,5 @@
+apply plugin: 'application'
+
 dependencies {
   compile project(':domain')
   compile project(':persistence')
@@ -27,3 +29,6 @@ test {
     systemProperties 'web.root': project(':webapp').file('src/main/content')
     systemProperties 'browser.driver': 'phantomjs'
 }
+
+applicationName = 'petstore'
+mainClassName = 'org.testinfected.petstore.Launcher'
